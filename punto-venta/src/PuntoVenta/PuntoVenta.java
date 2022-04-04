@@ -1,3 +1,4 @@
+package PuntoVenta;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -7,7 +8,8 @@ public class PuntoVenta {
 	private static ArrayList<Producto> productos = new ArrayList<Producto>();
 	private static ArrayList<Venta> ventas = new ArrayList<Venta>(); 
 	
-	public final static int OPCION_MENU_SALIR = 7;
+	public final static int OPCION_MENU_SALIR = 8;
+	public final static int OPCION_MENU_VENTAS = 7;
 	public final static int OPCION_MENU_CARGA_PRODUCTOS = 6; // Constante
 	public final static int OPCION_MENU_PAGAR = 5;
 	public final static int OPCION_MENU_AGREGAR_PRODUCTO_AL_CARRO = 4;
@@ -34,8 +36,11 @@ public class PuntoVenta {
 				case OPCION_MENU_AGREGAR_PRODUCTO_AL_CARRO:
 					agregarProductosAlCarro();
 					break;
+				case OPCION_MENU_VENTAS:
+					reporteVentas();
+					break;
 				case OPCION_MENU_PAGAR:
-					pagarProducto();
+					
 					break;
 				case OPCION_MENU_CARGA_PRODUCTOS:
 					cargarProductosIniciales();
@@ -47,6 +52,7 @@ public class PuntoVenta {
 
 	}
 	
+
 	private static void crearProducto() {
 		
 		Scanner leerProducto = new Scanner(System.in);
@@ -153,23 +159,35 @@ public class PuntoVenta {
 			ventas.add(venta);
 		}
 	}
-
-	private static void pagarProducto() {
+	
+	private static void reporteVentas() {
 		
+		System.out.println("\n\nVentas\n============\n ");
+		System.out.println("Fecha \t        Monto");
+		
+		for(Venta venta : ventas) {
+			System.out.printf("%td/%tm/%ty %tH:%tM \t %d \n", 
+					venta.getFecha(),
+					venta.getFecha(),
+					venta.getFecha(),
+					venta.getFecha(),
+					venta.getFecha(),
+					venta.calcularTotal());
+		}
 		
 	}
 
 	private static int menu() {
 		
-		
-		System.out.println("MENU PUNTO DE VENTA\n===================\n");
+		System.out.println("\nMENU PUNTO DE VENTA\n===================\n");
 		System.out.println("1. Crear Producto");
 		System.out.println("2. Ver Productos");
 		System.out.println("3. Eliminar Producto");
 		System.out.println("4. Agregar Producto al Carro");
 		System.out.println("5. Pagar");
 		System.out.println("6. Cargar productos iniciales");
-		System.out.println("7. SALIR");
+		System.out.println("7. Reporte de ventas");
+		System.out.println("8. SALIR");
 		
 		System.out.println("\nPor favor digite la opcion deseada:");
 		

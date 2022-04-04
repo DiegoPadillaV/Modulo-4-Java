@@ -1,4 +1,4 @@
-
+package PuntoVenta;
 public class LineaDetalle {
 	
 	private int cantidad;
@@ -29,5 +29,8 @@ public class LineaDetalle {
 		this.producto = producto;
 	}
 	
+	public int calcularSubTotal() {
+		return cantidad * producto.getPrecio();
+	}
 	
 }
