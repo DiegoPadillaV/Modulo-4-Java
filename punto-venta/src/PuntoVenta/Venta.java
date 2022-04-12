@@ -52,4 +52,12 @@ public class Venta {
 		return total;
 	}
 	
+	public String productosTotales() {
+		String productos = " Productos comprados: ";		
+		for (LineaDetalle l: this.lineasDetalle) {
+			productos = productos+ " | " +l.getCantidad() +" "+ l.getProducto().getNombre()+ " | ";
+		}	
+		return productos;
+	}
+	
 }

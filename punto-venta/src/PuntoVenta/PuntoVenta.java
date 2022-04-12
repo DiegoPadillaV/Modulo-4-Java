@@ -1,17 +1,20 @@
 package PuntoVenta;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Scanner;
 
 public class PuntoVenta {
 	
+	static DateTimeFormatter formateador = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+	
 	private static ArrayList<Producto> productos = new ArrayList<Producto>();
 	private static ArrayList<Venta> ventas = new ArrayList<Venta>(); 
 	
-	public final static int OPCION_MENU_SALIR = 8;
-	public final static int OPCION_MENU_VENTAS = 7;
-	public final static int OPCION_MENU_CARGA_PRODUCTOS = 6; // Constante
-	public final static int OPCION_MENU_PAGAR = 5;
+	public final static int OPCION_MENU_SALIR = 7;
+	public final static int OPCION_MENU_VENTAS = 6;
+	public final static int OPCION_MENU_CARGA_PRODUCTOS = 5; // Constante
 	public final static int OPCION_MENU_AGREGAR_PRODUCTO_AL_CARRO = 4;
 	public final static int OPCION_MENU_ELIMINAR = 3;
 	public final static int OPCION_MENU_VER = 2;
@@ -37,10 +40,7 @@ public class PuntoVenta {
 					agregarProductosAlCarro();
 					break;
 				case OPCION_MENU_VENTAS:
-					reporteVentas();
-					break;
-				case OPCION_MENU_PAGAR:
-					
+					generarReporte();
 					break;
 				case OPCION_MENU_CARGA_PRODUCTOS:
 					cargarProductosIniciales();
@@ -160,19 +160,34 @@ public class PuntoVenta {
 		}
 	}
 	
-	private static void reporteVentas() {
+	private static void generarReporte() {
 		
-		System.out.println("\n\nVentas\n============\n ");
-		System.out.println("Fecha \t        Monto");
+		// Define el nombre del archivo y su contenido con Strings
+		String nombreArchivo = "REPORTE-VENTAS.csv";
 		
-		for(Venta venta : ventas) {
-			System.out.printf("%td/%tm/%ty %tH:%tM \t %d \n", 
-					venta.getFecha(),
-					venta.getFecha(),
-					venta.getFecha(),
-					venta.getFecha(),
-					venta.getFecha(),
-					venta.calcularTotal());
+		// Crea un titul.
+		String contenidoArchivo = "REPORTE VENTAS\n==============\n";
+
+		// Por cada venta realizada, anota la fecha, los productos vendidos y el total de cada venta.
+		for (Venta venta : ventas) {
+			contenidoArchivo += "Fecha: "+ formateador.format(venta.getFecha())+"\n";
+			contenidoArchivo += venta.productosTotales()+"\n";
+			contenidoArchivo += "Total: "+venta.calcularTotal()+"\n";
+			contenidoArchivo += "-----------------------------------------------\n";
+		}
+		
+		//Utiliza un try-catch para evitar que el programa se rompa.
+		try {
+			// Crea un objeto FileWriter, importado desde utilidades de java
+			// Se encargará de crear el archivo a partir de los Strings definidos antes (nombreArchivo y contenidoArchivo)
+			FileWriter writer = new FileWriter(nombreArchivo);
+			writer.write(contenidoArchivo);
+			writer.close();
+			
+			System.out.println("Archivo generado exitosamente");
+			
+		} catch(IOException ioe) {
+			System.out.println("Fallo al escribir el archivo.");
 		}
 		
 	}
@@ -184,10 +199,9 @@ public class PuntoVenta {
 		System.out.println("2. Ver Productos");
 		System.out.println("3. Eliminar Producto");
 		System.out.println("4. Agregar Producto al Carro");
-		System.out.println("5. Pagar");
-		System.out.println("6. Cargar productos iniciales");
-		System.out.println("7. Reporte de ventas");
-		System.out.println("8. SALIR");
+		System.out.println("5. Cargar productos iniciales");
+		System.out.println("6. Reporte de ventas");
+		System.out.println("7. SALIR");
 		
 		System.out.println("\nPor favor digite la opcion deseada:");
 		
