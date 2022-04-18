@@ -12,4 +12,5 @@ Se solicita utilizar:
 
 Autor
 
--Diego Padilla
+- Diego Padilla
+- Jessie Uribe
