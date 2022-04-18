@@ -133,9 +133,9 @@ public class Consola {
 		String rutCliente = leer.nextLine();
 
 		System.out.println("Ingrese tipo de asiento preferido");
-		System.out.println("1. Palco - $80.000");
-		System.out.println("2. Platea - $40.000");
-		System.out.println("3. Galeria - $20.000");
+		System.out.println("1. Palco - $100.000");
+		System.out.println("2. Platea - $60.000");
+		System.out.println("3. Galeria - $30.000");
 		int preferenciaAsiento = leer.nextInt();
 		String tipoAsiento = "";
 

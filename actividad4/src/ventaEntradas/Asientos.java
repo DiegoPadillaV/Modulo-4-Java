@@ -41,11 +41,11 @@ public class Asientos {
 	
 	public int definicionTipoAsiento() {
 		if(this.tipo == "Palco") {
-			return 80000;
+			return 100000;
 		} else if(this.tipo == "Platea") {
-			return 40000;
+			return 60000;
 		} else {
-			return 20000;
+			return 30000;
 		}
 		
 	}
